@@ -1,0 +1,110 @@
+---
+title: "manual"
+author: "scottzijiezhang"
+date: "2018-12-01"
+output:
+  rmarkdown::html_document:
+    highlight: pygments
+    toc: true
+    toc_float: true
+---
+
+## **Introduction**
+Epitranscriptome profiling using MeRIP-seq is a powerful technique for in vivo functional studies of reversible RNA modifications. We developed MeRIPtools, a comprehensive tool to process and analyze aligned sequencing data. MeRIPtools also provide a framework to manage data associated with peak-calling, differential methylation analysis in R.
+
+
+
+## **Data struction**
+
+### **Naming convention of input files**
+ Since MeRIP-seq generate a pair of sequencing data – *Input* and *IP*, we denote these two libraries by `.input` or `.m6A` followed by `.bam` after sample names. Thus, the RADAR requires a pair of BAM files for each sample named as `<samplename>.input.bam` + `<samplename>.<modification>.bam`. The `<modification>` can be specified in the `countRead(... , modification = "<modification>")` function.  
+ All BAM files to be processed and analyzed together should be saved in one directory, the path to which needs to be specified in the `countRead(bamPath = ".../.../...")`. 
+  
+  
+### **The MeRIP and MeRIP.Peak class**
+ MeRIPtools used the S4 object system to manage the data involved in processing MeRIP-seq data. We defined a class `MeRIP` that stores the basic informations about a MeRIP-seq experiment (e.g. path to BAM files, read count matrix, gene model used to quantify reads etc.).  
+ We also defined two classes `MeRIP.Peak` and `MeRIP.RADAR` that inherits `MeRIP` class and each stores intermediate data and result involved in two different pipelines. `MeRIP.RADAR` is designed for peak-calling free differential methylation analysis pipeline as detailed in R package [*RADAR*](https://github.com/scottzijiezhang/RADAR). `MeRIP.Peak` is designed for peak-calling based analysis pipeline, as implemented in *MeRIPtools*. We will focus on `MeRIP.Peak` class in this manual.
+  
+ Data slots in `MeRIP` class:
+```{r, echo=FALSE}
+library(MeRIPtools)
+```
+```{r}
+getSlots("MeRIP")
+```
+`reads` Numeric matrix data for read count in *input* and *IP* library. The columns are sample names and rows are consecutive bins of user defined size (defaul is 50bp).  
+`binSize` Interger specifying the bin size used to divide the transcript.  
+`geneModel` A GRangesList that stores the gene model that has been filtered for ambiguous chromosome. Each element of the list contains a GRanges object specifying exons of a gene.  
+`gtf` The path to the gtf annotation file used to obtain gene model.  
+`bamPath.input` The path to input BAM files.  
+`bamPath.IP` The path to IP BAM files.  
+`samplenames` The prefix used for naming *input* and *IP* BAM files (as introduced in naming convention), which specifies the name of a sample.  
+`geneBins` Data.frame mapping each consecutive bins to the corresponding gene.  
+`geneSum` Numeric matrix data for gene level read count in the *input* library. This is equivalent to the read count matrix commenly used in RNA-seq differential expression analysis.  
+`GTF` The gtf annotation in GRanges format.  
+  
+  
+ Data slots in `MeRIP.Peak` class:
+```{r}
+getSlots("MeRIP.Peak")
+```
+
+`peakCallResult` Matrix data of logic data encode whether a bin (row) of a sample (column) is called a peak or not.  
+`jointPeaks` For quantitative analysis, we are interested in the union of peaks across experimental groups, thus we define joint peak as requiring a bin to be called a peak in at least <jointPeak_threshold> of samples. This data.frame stores the joint peak reported at user defined `jointPeak_threshold` in BED12 format.  
+`test.est` Parameter estimation by differential test either by RADARtest (PoissonGamma test), QNB (quad-negative binomial test) or Beta-binomial test.  
+`jointPeak_threshold` The threshold used to define joint peak in current MeRIP.Peak object.  
+`test.method` The statistical method used to make inferential test.  
+`variate` This data.frame store the predictor variable (the first column) used for inferential test and covariates (the rest of columns) to be included.  
+`sizeFactor` The estimated size factor for both Input and IP. 
+
+
+##**Functions**
+
+### countReads
+This is the very first function in MeRIP-seq data analysis that initianize a `MeRIP` object. This function takes BAM files of Input/IP library of each samples as input and use given GTF file as gene annotation to divide genes into consecutive bins of user defined size.  
+```{r,eval=FALSE}
+countReads(
+  samplenames,
+  gtf, 
+  fragmentLength = 150,
+  bamFolder,
+  outputDir=NA,
+  modification = "m6A",
+  binSize = 50,
+  strandToKeep = "opposite",
+  paired = FALSE,
+  threads = 1,
+  saveOutput = T
+)
+```
+Input parameters:
+The `samplenames` should be a vector of charaters that are the same as the prefix name of input BAM files. BAM files should be named as `<samplename>.input.bam` and `<samplename>.<modification>.bam`.  
+The `gtf` shoudl be a (charater) path to the gft annotation file.  
+The `fragmentLength` is the average length of RNA fragment. Default is 150bp.  
+The `bamFolder` should be a (charater) path to the dirctory where input BAM files are located.  
+The `outputDir` denote the path to save the read count result in RDS format.  
+The `modification` is a character denoting the mid-name of BAM files for IP sample. Default is "m6A", where `countReads` function expect to find `<samplenames>.m6A.bam` in the `bamPath` directory.  
+The `binSize` is an integer indicating the size of bin to divide the transcript.  
+The `strandToKeep` parameter set the strand specificity when counting the reads. Default is "opposite" for reverse-stranded library construction protocol, which is the most common one seen in RNA-seq. "same" denotes the sense-stranded library construction protocol, commonly seen in small RNA library kit. This parameter can also be set to "both" to ignore strand when counting the reads.  
+The `paired` is a logic parameter. Default is FALSE for single-end sequencing data. TURE for pair-end sequencing data where fragment length is calculated from the read pair instead of using the user provided parameter.   
+The `threads` set the number of threads to use for multi-core processing.  
+The `saveOutput` is logic parameter denoting whether read count result should be saved.  
+  
+This function will return a MeRIP class object that stores the read count in bins for each samples.  
+
+
+### callPeakFisher
+
+```{r,eval=FALSE}
+callPeakFisher(MeRIP = MeRIP_object,min_counts = 15, peak_cutoff_fdr = 0.05, peak_cutoff_oddRatio = 1, threads = 1)
+```
+
+### callPeakBinomial
+
+```{r,eval=FALSE}
+callPeakBinomial(MeRIP = MeRIP_object,min_counts = 15, peak_cutoff_fdr = 0.05, peak_cutoff_oddRatio = 1, threads = 1)
+```
+
+
+## **Reference**
+
