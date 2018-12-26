@@ -5,4 +5,6 @@ output:
     toc: false
 ---
 
-Describe your project.
+MeRIPtools is a toolset for analyzing MeRIP-seq ($m^6A-seq$). 
+
+The MeRIPtools is implemented in R and is freely available. 
