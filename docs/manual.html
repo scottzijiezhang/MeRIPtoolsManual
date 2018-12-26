@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="scottzijiezhang" />
+
+<meta name="date" content="2018-12-01" />
+
+<title>manual</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MeRIPtoolsManual</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="manual.html">Manual</a>
+</li>
+<li>
+  <a href="workflow.html">Standard workflow</a>
+</li>
+<li>
+  <a href="QTLflow.html">QTL discovery workflow</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jdblischak/workflowr">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">manual</h1>
+<h4 class="author"><em>scottzijiezhang</em></h4>
+<h4 class="date"><em>2018-12-01</em></h4>
+
+</div>
+
+
+<p><strong>Last updated:</strong> 2018-12-26</p>
+<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
+<ul>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20181201)</code> </summary></p>
+<p>The command <code>set.seed(20181201)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Session information:</strong> recorded </summary></p>
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/scottzijiezhang/MeRIPtoolsManual/tree/082ee27cb006b11523747d7a7ef0a480ed59a6ff" target="_blank">082ee27</a> </summary></p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    analysis/.Rhistory
+
+Untracked files:
+    Untracked:  analysis/QTLflow.Rmd
+    Untracked:  analysis/dif_meth.xls
+    Untracked:  data/MouseLiver_MeRIP.RData
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+    Modified:   analysis/about.Rmd
+    Modified:   analysis/index.Rmd
+
+</code></pre>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
+</li>
+</ul>
+<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
+<ul>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/scottzijiezhang/MeRIPtoolsManual/blob/082ee27cb006b11523747d7a7ef0a480ed59a6ff/analysis/manual.Rmd" target="_blank">082ee27</a>
+</td>
+<td style="text-align:left;">
+scottzijiezhang
+</td>
+<td style="text-align:left;">
+2018-12-26
+</td>
+<td style="text-align:left;">
+wflow_publish(“manual.Rmd”)
+</td>
+</tr>
+</tbody>
+</table>
+</ul>
+<p></details></p>
+<hr />
+<div id="introduction" class="section level2">
+<h2><strong>Introduction</strong></h2>
+<p>Epitranscriptome profiling using MeRIP-seq is a powerful technique for in vivo functional studies of reversible RNA modifications. We developed MeRIPtools, a comprehensive tool to process and analyze aligned sequencing data. MeRIPtools also provide a framework to manage data associated with peak-calling, differential methylation analysis in R.</p>
+</div>
+<div id="data-struction" class="section level2">
+<h2><strong>Data struction</strong></h2>
+<div id="naming-convention-of-input-files" class="section level3">
+<h3><strong>Naming convention of input files</strong></h3>
+<p>Since MeRIP-seq generate a pair of sequencing data – <em>Input</em> and <em>IP</em>, we denote these two libraries by <code>.input</code> or <code>.m6A</code> followed by <code>.bam</code> after sample names. Thus, the RADAR requires a pair of BAM files for each sample named as <code>&lt;samplename&gt;.input.bam</code> + <code>&lt;samplename&gt;.&lt;modification&gt;.bam</code>. The <code>&lt;modification&gt;</code> can be specified in the <code>countRead(... , modification = &quot;&lt;modification&gt;&quot;)</code> function.<br />
+All BAM files to be processed and analyzed together should be saved in one directory, the path to which needs to be specified in the <code>countRead(bamPath = &quot;.../.../...&quot;)</code>.</p>
+</div>
+<div id="the-merip-and-merip.peak-class" class="section level3">
+<h3><strong>The MeRIP and MeRIP.Peak class</strong></h3>
+<p>MeRIPtools used the S4 object system to manage the data involved in processing MeRIP-seq data. We defined a class <code>MeRIP</code> that stores the basic informations about a MeRIP-seq experiment (e.g. path to BAM files, read count matrix, gene model used to quantify reads etc.).<br />
+We also defined two classes <code>MeRIP.Peak</code> and <code>MeRIP.RADAR</code> that inherits <code>MeRIP</code> class and each stores intermediate data and result involved in two different pipelines. <code>MeRIP.RADAR</code> is designed for peak-calling free differential methylation analysis pipeline as detailed in R package <a href="https://github.com/scottzijiezhang/RADAR"><em>RADAR</em></a>. <code>MeRIP.Peak</code> is designed for peak-calling based analysis pipeline, as implemented in <em>MeRIPtools</em>. We will focus on <code>MeRIP.Peak</code> class in this manual.</p>
+<p>Data slots in <code>MeRIP</code> class:</p>
+<pre><code>Loading required package: GenomicFeatures</code></pre>
+<pre><code>Loading required package: BiocGenerics</code></pre>
+<pre><code>Loading required package: parallel</code></pre>
+<pre><code>
+Attaching package: &#39;BiocGenerics&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:parallel&#39;:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    IQR, mad, sd, var, xtabs</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    anyDuplicated, append, as.data.frame, basename, cbind,
+    colMeans, colnames, colSums, dirname, do.call, duplicated,
+    eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which, which.max,
+    which.min</code></pre>
+<pre><code>Loading required package: S4Vectors</code></pre>
+<pre><code>Loading required package: stats4</code></pre>
+<pre><code>
+Attaching package: &#39;S4Vectors&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:base&#39;:
+
+    expand.grid</code></pre>
+<pre><code>Loading required package: IRanges</code></pre>
+<pre><code>Loading required package: GenomeInfoDb</code></pre>
+<pre><code>Loading required package: GenomicRanges</code></pre>
+<pre><code>Loading required package: AnnotationDbi</code></pre>
+<pre><code>Loading required package: Biobase</code></pre>
+<pre><code>Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    &#39;browseVignettes()&#39;. To cite Bioconductor, see
+    &#39;citation(&quot;Biobase&quot;)&#39;, and for packages &#39;citation(&quot;pkgname&quot;)&#39;.</code></pre>
+<pre><code>Loading required package: Rsamtools</code></pre>
+<pre><code>Loading required package: Biostrings</code></pre>
+<pre><code>Loading required package: XVector</code></pre>
+<pre><code>
+Attaching package: &#39;Biostrings&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:base&#39;:
+
+    strsplit</code></pre>
+<pre><code>Loading required package: ggplot2</code></pre>
+<pre><code>Loading required package: doParallel</code></pre>
+<pre><code>Loading required package: foreach</code></pre>
+<pre><code>Loading required package: iterators</code></pre>
+<pre><code>Loading required package: grid</code></pre>
+<pre><code>Loading required package: rtracklayer</code></pre>
+<pre><code>Loading required package: GenomicAlignments</code></pre>
+<pre><code>Loading required package: SummarizedExperiment</code></pre>
+<pre><code>Loading required package: DelayedArray</code></pre>
+<pre><code>Loading required package: matrixStats</code></pre>
+<pre><code>
+Attaching package: &#39;matrixStats&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:Biobase&#39;:
+
+    anyMissing, rowMedians</code></pre>
+<pre><code>Loading required package: BiocParallel</code></pre>
+<pre><code>
+Attaching package: &#39;DelayedArray&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:matrixStats&#39;:
+
+    colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges</code></pre>
+<pre><code>The following object is masked from &#39;package:Biostrings&#39;:
+
+    type</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    aperm, apply</code></pre>
+<pre><code>Loading required package: reshape2</code></pre>
+<pre><code>Loading required package: Rcpp</code></pre>
+<pre><code>Loading required package: RcppArmadillo</code></pre>
+<pre><code>Loading required package: qvalue</code></pre>
+<pre><code>
+Attaching package: &#39;MeRIPtools&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:AnnotationDbi&#39;:
+
+    select</code></pre>
+<pre><code>The following object is masked from &#39;package:stats&#39;:
+
+    filter</code></pre>
+<pre class="r"><code>getSlots(&quot;MeRIP&quot;)</code></pre>
+<pre><code>        reads       binSize     geneModel           gtf bamPath.input 
+     &quot;matrix&quot;     &quot;numeric&quot; &quot;GRangesList&quot;   &quot;character&quot;   &quot;character&quot; 
+   bamPath.ip   samplenames      geneBins       geneSum           GTF 
+  &quot;character&quot;   &quot;character&quot;  &quot;data.frame&quot;      &quot;matrix&quot;     &quot;GRanges&quot; </code></pre>
+<p><code>reads</code> Numeric matrix data for read count in <em>input</em> and <em>IP</em> library. The columns are sample names and rows are consecutive bins of user defined size (defaul is 50bp).<br />
+<code>binSize</code> Interger specifying the bin size used to divide the transcript.<br />
+<code>geneModel</code> A GRangesList that stores the gene model that has been filtered for ambiguous chromosome. Each element of the list contains a GRanges object specifying exons of a gene.<br />
+<code>gtf</code> The path to the gtf annotation file used to obtain gene model.<br />
+<code>bamPath.input</code> The path to input BAM files.<br />
+<code>bamPath.IP</code> The path to IP BAM files.<br />
+<code>samplenames</code> The prefix used for naming <em>input</em> and <em>IP</em> BAM files (as introduced in naming convention), which specifies the name of a sample.<br />
+<code>geneBins</code> Data.frame mapping each consecutive bins to the corresponding gene.<br />
+<code>geneSum</code> Numeric matrix data for gene level read count in the <em>input</em> library. This is equivalent to the read count matrix commenly used in RNA-seq differential expression analysis.<br />
+<code>GTF</code> The gtf annotation in GRanges format.</p>
+<p>Data slots in <code>MeRIP.Peak</code> class:</p>
+<pre class="r"><code>getSlots(&quot;MeRIP.Peak&quot;)</code></pre>
+<pre><code>     peakCallResult  jointPeak_id_pairs          jointPeaks 
+           &quot;matrix&quot;            &quot;matrix&quot;        &quot;data.frame&quot; 
+       jointPeak_ip     jointPeak_input   norm.jointPeak_ip 
+           &quot;matrix&quot;            &quot;matrix&quot;            &quot;matrix&quot; 
+         sizeFactor             variate   jointPeak_adjExpr 
+       &quot;data.frame&quot;        &quot;data.frame&quot;            &quot;matrix&quot; 
+           test.est         peakCalling jointPeak_threshold 
+           &quot;matrix&quot;         &quot;character&quot;           &quot;numeric&quot; 
+        test.method               reads             binSize 
+        &quot;character&quot;            &quot;matrix&quot;           &quot;numeric&quot; 
+          geneModel                 gtf       bamPath.input 
+      &quot;GRangesList&quot;         &quot;character&quot;         &quot;character&quot; 
+         bamPath.ip         samplenames            geneBins 
+        &quot;character&quot;         &quot;character&quot;        &quot;data.frame&quot; 
+            geneSum                 GTF 
+           &quot;matrix&quot;           &quot;GRanges&quot; </code></pre>
+<p><code>peakCallResult</code> Matrix data of logic data encode whether a bin (row) of a sample (column) is called a peak or not.<br />
+<code>jointPeaks</code> For quantitative analysis, we are interested in the union of peaks across experimental groups, thus we define joint peak as requiring a bin to be called a peak in at least <jointPeak_threshold> of samples. This data.frame stores the joint peak reported at user defined <code>jointPeak_threshold</code> in BED12 format.<br />
+<code>test.est</code> Parameter estimation by differential test either by RADARtest (PoissonGamma test), QNB (quad-negative binomial test) or Beta-binomial test.<br />
+<code>jointPeak_threshold</code> The threshold used to define joint peak in current MeRIP.Peak object.<br />
+<code>test.method</code> The statistical method used to make inferential test.<br />
+<code>variate</code> This data.frame store the predictor variable (the first column) used for inferential test and covariates (the rest of columns) to be included.<br />
+<code>sizeFactor</code> The estimated size factor for both Input and IP.</p>
+</div>
+</div>
+<div id="functions" class="section level2">
+<h2><strong>Functions</strong></h2>
+<div id="countreads" class="section level3">
+<h3>countReads</h3>
+<p>This is the very first function in MeRIP-seq data analysis that initianize a <code>MeRIP</code> object. This function takes BAM files of Input/IP library of each samples as input and use given GTF file as gene annotation to divide genes into consecutive bins of user defined size.</p>
+<pre class="r"><code>countReads(
+  samplenames,
+  gtf, 
+  fragmentLength = 150,
+  bamFolder,
+  outputDir=NA,
+  modification = &quot;m6A&quot;,
+  binSize = 50,
+  strandToKeep = &quot;opposite&quot;,
+  paired = FALSE,
+  threads = 1,
+  saveOutput = T
+)</code></pre>
+<p>Input parameters: The <code>samplenames</code> should be a vector of charaters that are the same as the prefix name of input BAM files. BAM files should be named as <code>&lt;samplename&gt;.input.bam</code> and <code>&lt;samplename&gt;.&lt;modification&gt;.bam</code>.<br />
+The <code>gtf</code> shoudl be a (charater) path to the gft annotation file.<br />
+The <code>fragmentLength</code> is the average length of RNA fragment. Default is 150bp.<br />
+The <code>bamFolder</code> should be a (charater) path to the dirctory where input BAM files are located.<br />
+The <code>outputDir</code> denote the path to save the read count result in RDS format.<br />
+The <code>modification</code> is a character denoting the mid-name of BAM files for IP sample. Default is “m6A”, where <code>countReads</code> function expect to find <code>&lt;samplenames&gt;.m6A.bam</code> in the <code>bamPath</code> directory.<br />
+The <code>binSize</code> is an integer indicating the size of bin to divide the transcript.<br />
+The <code>strandToKeep</code> parameter set the strand specificity when counting the reads. Default is “opposite” for reverse-stranded library construction protocol, which is the most common one seen in RNA-seq. “same” denotes the sense-stranded library construction protocol, commonly seen in small RNA library kit. This parameter can also be set to “both” to ignore strand when counting the reads.<br />
+The <code>paired</code> is a logic parameter. Default is FALSE for single-end sequencing data. TURE for pair-end sequencing data where fragment length is calculated from the read pair instead of using the user provided parameter.<br />
+The <code>threads</code> set the number of threads to use for multi-core processing.<br />
+The <code>saveOutput</code> is logic parameter denoting whether read count result should be saved.</p>
+<p>This function will return a MeRIP class object that stores the read count in bins for each samples.</p>
+</div>
+<div id="callpeakfisher" class="section level3">
+<h3>callPeakFisher</h3>
+<pre class="r"><code>callPeakFisher(MeRIP = MeRIP_object,min_counts = 15, peak_cutoff_fdr = 0.05, peak_cutoff_oddRatio = 1, threads = 1)</code></pre>
+</div>
+<div id="callpeakbinomial" class="section level3">
+<h3>callPeakBinomial</h3>
+<pre class="r"><code>callPeakBinomial(MeRIP = MeRIP_object,min_counts = 15, peak_cutoff_fdr = 0.05, peak_cutoff_oddRatio = 1, threads = 1)</code></pre>
+</div>
+</div>
+<div id="reference" class="section level2">
+<h2><strong>Reference</strong></h2>
+</div>
+<div id="session-information" class="section level2">
+<h2>Session information</h2>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.0 (2018-04-23)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 17.10
+
+Matrix products: default
+BLAS: /usr/lib/x86_64-linux-gnu/openblas/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/libopenblasp-r0.2.20.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+ [1] grid      stats4    parallel  stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] MeRIPtools_0.1.0            qvalue_2.14.0              
+ [3] RcppArmadillo_0.9.200.5.0   Rcpp_1.0.0                 
+ [5] reshape2_1.4.3              GenomicAlignments_1.18.0   
+ [7] SummarizedExperiment_1.12.0 DelayedArray_0.8.0         
+ [9] BiocParallel_1.16.2         matrixStats_0.54.0         
+[11] rtracklayer_1.42.1          doParallel_1.0.14          
+[13] iterators_1.0.10            foreach_1.4.4              
+[15] ggplot2_3.1.0               Rsamtools_1.34.0           
+[17] Biostrings_2.50.1           XVector_0.22.0             
+[19] GenomicFeatures_1.34.1      AnnotationDbi_1.44.0       
+[21] Biobase_2.42.0              GenomicRanges_1.34.0       
+[23] GenomeInfoDb_1.18.1         IRanges_2.16.0             
+[25] S4Vectors_0.20.1            BiocGenerics_0.28.0        
+
+loaded via a namespace (and not attached):
+  [1] colorspace_1.3-2       rprojroot_1.3-2        htmlTable_1.12        
+  [4] base64enc_0.1-3        rstudioapi_0.8         QNB_1.1.11            
+  [7] bit64_0.9-7            codetools_0.2-15       splines_3.5.0         
+ [10] R.methodsS3_1.7.1      geneplotter_1.60.0     knitr_1.20            
+ [13] Formula_1.2-3          workflowr_1.1.1        broom_0.5.0           
+ [16] annotate_1.60.0        cluster_2.0.7-1        R.oo_1.22.0           
+ [19] gamlss.dist_5.1-0      compiler_3.5.0         httr_1.3.1            
+ [22] backports_1.1.2        assertthat_0.2.0       Matrix_1.2-15         
+ [25] lazyeval_0.2.1         acepack_1.4.1          htmltools_0.3.6       
+ [28] prettyunits_1.0.2      tools_3.5.0            bindrcpp_0.2.2        
+ [31] gtable_0.2.0           glue_1.3.0             GenomeInfoDbData_1.2.0
+ [34] dplyr_0.7.8            ape_5.2                nlme_3.1-137          
+ [37] pinfsc50_1.1.0         stringr_1.3.1          XML_3.98-1.16         
+ [40] zlibbioc_1.28.0        MASS_7.3-51.1          scales_1.0.0          
+ [43] BSgenome_1.50.0        hms_0.4.2              gamlss.data_5.1-0     
+ [46] RColorBrewer_1.1-2     yaml_2.2.0             memoise_1.1.0         
+ [49] gridExtra_2.3          biomaRt_2.38.0         rpart_4.1-13          
+ [52] latticeExtra_0.6-28    stringi_1.2.4          RSQLite_2.1.1         
+ [55] genefilter_1.64.0      permute_0.9-4          checkmate_1.8.5       
+ [58] exomePeak_2.16.0       rlang_0.3.0.1          pkgconfig_2.0.2       
+ [61] bitops_1.0-6           evaluate_0.12          lattice_0.20-38       
+ [64] purrr_0.2.5            bindr_0.1.1            Guitar_1.20.0         
+ [67] htmlwidgets_1.3        bit_1.1-14             tidyselect_0.2.5      
+ [70] plyr_1.8.4             magrittr_1.5           DESeq2_1.22.1         
+ [73] R6_2.3.0               Hmisc_4.1-1            DBI_1.0.0             
+ [76] mgcv_1.8-26            pillar_1.3.0           whisker_0.3-2         
+ [79] foreign_0.8-71         withr_2.1.2            survival_2.43-3       
+ [82] RCurl_1.95-4.11        nnet_7.3-12            tibble_1.4.2          
+ [85] crayon_1.3.4           gamlss_5.1-2           vcfR_1.8.0            
+ [88] rmarkdown_1.10         progress_1.2.0         locfit_1.5-9.1        
+ [91] data.table_1.11.8      vegan_2.5-3            blob_1.1.1            
+ [94] git2r_0.23.0           digest_0.6.18          xtable_1.8-3          
+ [97] tidyr_0.8.2            R.utils_2.7.0          munsell_0.5.0         
+[100] viridisLite_0.3.0     </code></pre>
+</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<hr>
+<p>
+  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+  analysis was created with
+  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
+</p>
+<hr>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
