@@ -25,28 +25,54 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
+
 <style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
   }
 </style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
-
 
 
 <style type="text/css">
@@ -311,13 +337,6 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<!-- Add a small amount of space between sections. -->
-<style type="text/css">
-div.section {
-  padding-top: 12px;
-}
-</style>
-
 <div class="fluid-row" id="header">
 
 
@@ -329,215 +348,6 @@ div.section {
 </div>
 
 
-<p><strong>Last updated:</strong> 2018-12-27</p>
-<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
-<ul>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20181201)</code> </summary></p>
-<p>The command <code>set.seed(20181201)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:red;">✖</strong> <strong>Session information:</strong> unavailable </summary></p>
-<p>Recording the operating system, R version, and package versions is critical for reproducibility. To record the session information, add <code>sessioninfo: “sessionInfo()”</code> to _workflowr.yml. Alternatively, you could use <code>devtools::session_info()</code> or <code>sessioninfo::session_info()</code>. Lastly, you can manually add a code chunk to this file to run any one of these commands and then disable to automatic insertion by changing the workflowr setting to <code>sessioninfo: “”</code>.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/scottzijiezhang/MeRIPtoolsManual/tree/62a31426f923ea2584ad135b9c561ba0639ee0fb" target="_blank">62a3142</a> </summary></p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
-<pre><code>
-Ignored files:
-    Ignored:    .Rhistory
-    Ignored:    analysis/.Rhistory
-
-Untracked files:
-    Untracked:  analysis/QTLflow.Rmd
-    Untracked:  analysis/dif_meth.xls
-    Untracked:  data/MouseLiver_MeRIP.RData
-
-Unstaged changes:
-    Modified:   _workflowr.yml
-    Modified:   analysis/_site.yml
-    Modified:   analysis/workflow.Rmd
-
-</code></pre>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
-</li>
-</ul>
-<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
-<ul>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-File
-</th>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-<th style="text-align:left;">
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/scottzijiezhang/MeRIPtoolsManual/62a31426f923ea2584ad135b9c561ba0639ee0fb/docs/manual.html" target="_blank">62a3142</a>
-</td>
-<td style="text-align:left;">
-scottzijiezhang
-</td>
-<td style="text-align:left;">
-2018-12-26
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Rmd
-</td>
-<td style="text-align:left;">
-<a href="https://github.com/scottzijiezhang/MeRIPtoolsManual/blob/27176b6a290e50fe2ec4ec23ffa833e5c96ba5fb/analysis/manual.Rmd" target="_blank">27176b6</a>
-</td>
-<td style="text-align:left;">
-scottzijiezhang
-</td>
-<td style="text-align:left;">
-2018-12-26
-</td>
-<td style="text-align:left;">
-wflow_publish(c(“manual.Rmd”))
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/scottzijiezhang/MeRIPtoolsManual/1df7c94ec1afb739a90bad396602b4f2db02da84/docs/manual.html" target="_blank">1df7c94</a>
-</td>
-<td style="text-align:left;">
-scottzijiezhang
-</td>
-<td style="text-align:left;">
-2018-12-26
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Rmd
-</td>
-<td style="text-align:left;">
-<a href="https://github.com/scottzijiezhang/MeRIPtoolsManual/blob/99d1af33cd83ed64f04d569a0e5a4a6e87b7c05b/analysis/manual.Rmd" target="_blank">99d1af3</a>
-</td>
-<td style="text-align:left;">
-scottzijiezhang
-</td>
-<td style="text-align:left;">
-2018-12-26
-</td>
-<td style="text-align:left;">
-wflow_publish(c(“manual.Rmd”))
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/scottzijiezhang/MeRIPtoolsManual/2f45e67ea2d4c802ae1e2c720aab60553de1b813/docs/manual.html" target="_blank">2f45e67</a>
-</td>
-<td style="text-align:left;">
-scottzijiezhang
-</td>
-<td style="text-align:left;">
-2018-12-26
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Rmd
-</td>
-<td style="text-align:left;">
-<a href="https://github.com/scottzijiezhang/MeRIPtoolsManual/blob/86ecf28c690184ac1ee08e5264ece043dbdc8022/analysis/manual.Rmd" target="_blank">86ecf28</a>
-</td>
-<td style="text-align:left;">
-scottzijiezhang
-</td>
-<td style="text-align:left;">
-2018-12-26
-</td>
-<td style="text-align:left;">
-wflow_publish(c(“manual.Rmd”))
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/scottzijiezhang/MeRIPtoolsManual/fee4f2ec24ad11638aad602aa52c96b178a04352/docs/manual.html" target="_blank">fee4f2e</a>
-</td>
-<td style="text-align:left;">
-scottzijiezhang
-</td>
-<td style="text-align:left;">
-2018-12-26
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Rmd
-</td>
-<td style="text-align:left;">
-<a href="https://github.com/scottzijiezhang/MeRIPtoolsManual/blob/082ee27cb006b11523747d7a7ef0a480ed59a6ff/analysis/manual.Rmd" target="_blank">082ee27</a>
-</td>
-<td style="text-align:left;">
-scottzijiezhang
-</td>
-<td style="text-align:left;">
-2018-12-26
-</td>
-<td style="text-align:left;">
-wflow_publish(“manual.Rmd”)
-</td>
-</tr>
-</tbody>
-</table>
-</ul>
-<p></details></p>
-<hr />
 <div id="introduction" class="section level2">
 <h2><strong>Introduction</strong></h2>
 <p>Epitranscriptome profiling using MeRIP-seq is a powerful technique for in vivo functional studies of reversible RNA modifications. We developed MeRIPtools, a comprehensive tool to process and analyze aligned sequencing data. MeRIPtools also provide a framework to manage data associated with peak-calling, differential methylation analysis in R.</p>
@@ -554,11 +364,11 @@ All BAM files to be processed and analyzed together should be saved in one direc
 <p>MeRIPtools used the S4 object system to manage the data involved in processing MeRIP-seq data. We defined a class <code>MeRIP</code> that stores the basic informations about a MeRIP-seq experiment (e.g. path to BAM files, read count matrix, gene model used to quantify reads etc.).<br />
 We also defined two classes <code>MeRIP.Peak</code> and <code>MeRIP.RADAR</code> that inherits <code>MeRIP</code> class and each stores intermediate data and result involved in two different pipelines. <code>MeRIP.RADAR</code> is designed for peak-calling free differential methylation analysis pipeline as detailed in R package <a href="https://github.com/scottzijiezhang/RADAR"><em>RADAR</em></a>. <code>MeRIP.Peak</code> is designed for peak-calling based analysis pipeline, as implemented in <em>MeRIPtools</em>. We will focus on <code>MeRIP.Peak</code> class in this manual.</p>
 <p>Data slots in <code>MeRIP</code> class:</p>
-<pre class="r"><code>getSlots(&quot;MeRIP&quot;)</code></pre>
-<pre><code>        reads       binSize     geneModel           gtf bamPath.input 
-     &quot;matrix&quot;     &quot;numeric&quot; &quot;GRangesList&quot;   &quot;character&quot;   &quot;character&quot; 
-   bamPath.ip   samplenames      geneBins       geneSum           GTF 
-  &quot;character&quot;   &quot;character&quot;  &quot;data.frame&quot;      &quot;matrix&quot;     &quot;GRanges&quot; </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getSlots</span>(<span class="st">&quot;MeRIP&quot;</span>)</code></pre></div>
+<pre><code>##         reads       binSize     geneModel           gtf bamPath.input 
+##      &quot;matrix&quot;     &quot;numeric&quot; &quot;GRangesList&quot;   &quot;character&quot;   &quot;character&quot; 
+##    bamPath.ip   samplenames      geneBins       geneSum           GTF 
+##   &quot;character&quot;   &quot;character&quot;  &quot;data.frame&quot;      &quot;matrix&quot;     &quot;GRanges&quot;</code></pre>
 <p><code>reads</code> Numeric matrix data for read count in <em>input</em> and <em>IP</em> library. The columns are sample names and rows are consecutive bins of user defined size (defaul is 50bp).<br />
 <code>binSize</code> Interger specifying the bin size used to divide the transcript.<br />
 <code>geneModel</code> A GRangesList that stores the gene model that has been filtered for ambiguous chromosome. Each element of the list contains a GRanges object specifying exons of a gene.<br />
@@ -570,23 +380,23 @@ We also defined two classes <code>MeRIP.Peak</code> and <code>MeRIP.RADAR</code>
 <code>geneSum</code> Numeric matrix data for gene level read count in the <em>input</em> library. This is equivalent to the read count matrix commenly used in RNA-seq differential expression analysis.<br />
 <code>GTF</code> The gtf annotation in GRanges format.</p>
 <p>Data slots in <code>MeRIP.Peak</code> class:</p>
-<pre class="r"><code>getSlots(&quot;MeRIP.Peak&quot;)</code></pre>
-<pre><code>     peakCallResult  jointPeak_id_pairs          jointPeaks 
-           &quot;matrix&quot;            &quot;matrix&quot;        &quot;data.frame&quot; 
-       jointPeak_ip     jointPeak_input   norm.jointPeak_ip 
-           &quot;matrix&quot;            &quot;matrix&quot;            &quot;matrix&quot; 
-         sizeFactor             variate   jointPeak_adjExpr 
-       &quot;data.frame&quot;        &quot;data.frame&quot;            &quot;matrix&quot; 
-           test.est         peakCalling jointPeak_threshold 
-           &quot;matrix&quot;         &quot;character&quot;           &quot;numeric&quot; 
-        test.method               reads             binSize 
-        &quot;character&quot;            &quot;matrix&quot;           &quot;numeric&quot; 
-          geneModel                 gtf       bamPath.input 
-      &quot;GRangesList&quot;         &quot;character&quot;         &quot;character&quot; 
-         bamPath.ip         samplenames            geneBins 
-        &quot;character&quot;         &quot;character&quot;        &quot;data.frame&quot; 
-            geneSum                 GTF 
-           &quot;matrix&quot;           &quot;GRanges&quot; </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getSlots</span>(<span class="st">&quot;MeRIP.Peak&quot;</span>)</code></pre></div>
+<pre><code>##      peakCallResult  jointPeak_id_pairs          jointPeaks 
+##            &quot;matrix&quot;            &quot;matrix&quot;        &quot;data.frame&quot; 
+##        jointPeak_ip     jointPeak_input   norm.jointPeak_ip 
+##            &quot;matrix&quot;            &quot;matrix&quot;            &quot;matrix&quot; 
+##          sizeFactor             variate   jointPeak_adjExpr 
+##        &quot;data.frame&quot;        &quot;data.frame&quot;            &quot;matrix&quot; 
+##            test.est         peakCalling jointPeak_threshold 
+##            &quot;matrix&quot;         &quot;character&quot;           &quot;numeric&quot; 
+##         test.method               reads             binSize 
+##         &quot;character&quot;            &quot;matrix&quot;           &quot;numeric&quot; 
+##           geneModel                 gtf       bamPath.input 
+##       &quot;GRangesList&quot;         &quot;character&quot;         &quot;character&quot; 
+##          bamPath.ip         samplenames            geneBins 
+##         &quot;character&quot;         &quot;character&quot;        &quot;data.frame&quot; 
+##             geneSum                 GTF 
+##            &quot;matrix&quot;           &quot;GRanges&quot;</code></pre>
 <p><code>peakCallResult</code> Matrix data of logic data encode whether a bin (row) of a sample (column) is called a peak or not.<br />
 <code>jointPeaks</code> For quantitative analysis, we are interested in the union of peaks across experimental groups, thus we define joint peak as requiring a bin to be called a peak in at least <jointPeak_threshold> of samples. This data.frame stores the joint peak reported at user defined <code>jointPeak_threshold</code> in BED12 format.<br />
 <code>test.est</code> Parameter estimation by differential test either by RADARtest (PoissonGamma test), QNB (quad-negative binomial test) or Beta-binomial test.<br />
@@ -601,19 +411,19 @@ We also defined two classes <code>MeRIP.Peak</code> and <code>MeRIP.RADAR</code>
 <div id="countreads" class="section level3">
 <h3>countReads</h3>
 <p>This is the very first function in MeRIP-seq data analysis that initianize a <code>MeRIP</code> object. This function takes BAM files of Input/IP library of each samples as input and use given GTF file as gene annotation to divide genes into consecutive bins of user defined size.</p>
-<pre class="r"><code>countReads(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">countReads</span>(
   samplenames,
   gtf, 
-  fragmentLength = 150,
+  <span class="dt">fragmentLength =</span> <span class="dv">150</span>,
   bamFolder,
-  outputDir=NA,
-  modification = &quot;m6A&quot;,
-  binSize = 50,
-  strandToKeep = &quot;opposite&quot;,
-  paired = FALSE,
-  threads = 1,
-  saveOutput = T
-)</code></pre>
+  <span class="dt">outputDir=</span><span class="ot">NA</span>,
+  <span class="dt">modification =</span> <span class="st">&quot;m6A&quot;</span>,
+  <span class="dt">binSize =</span> <span class="dv">50</span>,
+  <span class="dt">strandToKeep =</span> <span class="st">&quot;opposite&quot;</span>,
+  <span class="dt">paired =</span> <span class="ot">FALSE</span>,
+  <span class="dt">threads =</span> <span class="dv">1</span>,
+  <span class="dt">saveOutput =</span> T
+)</code></pre></div>
 <p>Input parameters: The <code>samplenames</code> should be a vector of charaters that are the same as the prefix name of input BAM files. BAM files should be named as <code>&lt;samplename&gt;.input.bam</code> and <code>&lt;samplename&gt;.&lt;modification&gt;.bam</code>.<br />
 The <code>gtf</code> shoudl be a (charater) path to the gft annotation file.<br />
 The <code>fragmentLength</code> is the average length of RNA fragment. Default is 150bp.<br />
@@ -629,36 +439,17 @@ The <code>saveOutput</code> is logic parameter denoting whether read count resul
 </div>
 <div id="callpeakfisher" class="section level3">
 <h3>callPeakFisher</h3>
-<pre class="r"><code>callPeakFisher(MeRIP = MeRIP_object,min_counts = 15, peak_cutoff_fdr = 0.05, peak_cutoff_oddRatio = 1, threads = 1)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">callPeakFisher</span>(<span class="dt">MeRIP =</span> MeRIP_object,<span class="dt">min_counts =</span> <span class="dv">15</span>, <span class="dt">peak_cutoff_fdr =</span> <span class="fl">0.05</span>, <span class="dt">peak_cutoff_oddRatio =</span> <span class="dv">1</span>, <span class="dt">threads =</span> <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="callpeakbinomial" class="section level3">
 <h3>callPeakBinomial</h3>
-<pre class="r"><code>callPeakBinomial(MeRIP = MeRIP_object,min_counts = 15, peak_cutoff_fdr = 0.05, peak_cutoff_oddRatio = 1, threads = 1)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">callPeakBinomial</span>(<span class="dt">MeRIP =</span> MeRIP_object,<span class="dt">min_counts =</span> <span class="dv">15</span>, <span class="dt">peak_cutoff_fdr =</span> <span class="fl">0.05</span>, <span class="dt">peak_cutoff_oddRatio =</span> <span class="dv">1</span>, <span class="dt">threads =</span> <span class="dv">1</span>)</code></pre></div>
 </div>
 </div>
 <div id="reference" class="section level2">
 <h2><strong>Reference</strong></h2>
 </div>
 
-<!-- Adjust MathJax settings so that all math formulae are shown using
-TeX fonts only; see
-http://docs.mathjax.org/en/latest/configuration.html.  This will make
-the presentation more consistent at the cost of the webpage sometimes
-taking slightly longer to load. Note that this only works because the
-footer is added to webpages before the MathJax javascript. -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    "HTML-CSS": { availableFonts: ["TeX"] }
-  });
-</script>
-
-<hr>
-<p>
-  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-  analysis was created with
-  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
-</p>
-<hr>
 
 
 </div>
