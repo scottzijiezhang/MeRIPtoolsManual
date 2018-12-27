@@ -3,7 +3,7 @@ title: "manual"
 author: "scottzijiezhang"
 date: "2018-12-01"
 output:
-  rmarkdown::html_document:
+  html_document:
     highlight: pygments
     toc: true
     toc_float: true
@@ -14,7 +14,7 @@ Epitranscriptome profiling using MeRIP-seq is a powerful technique for in vivo f
 
 
 
-## **Data struction**
+## **Data structure**
 
 ### **Naming convention of input files**
  Since MeRIP-seq generate a pair of sequencing data – *Input* and *IP*, we denote these two libraries by `.input` or `.m6A` followed by `.bam` after sample names. Thus, the RADAR requires a pair of BAM files for each sample named as `<samplename>.input.bam` + `<samplename>.<modification>.bam`. The `<modification>` can be specified in the `countRead(... , modification = "<modification>")` function.  
