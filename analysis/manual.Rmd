@@ -26,7 +26,7 @@ Epitranscriptome profiling using MeRIP-seq is a powerful technique for in vivo f
  We also defined two classes `MeRIP.Peak` and `MeRIP.RADAR` that inherits `MeRIP` class and each stores intermediate data and result involved in two different pipelines. `MeRIP.RADAR` is designed for peak-calling free differential methylation analysis pipeline as detailed in R package [*RADAR*](https://github.com/scottzijiezhang/RADAR). `MeRIP.Peak` is designed for peak-calling based analysis pipeline, as implemented in *MeRIPtools*. We will focus on `MeRIP.Peak` class in this manual.
   
  Data slots in `MeRIP` class:
-```{r, echo=FALSE}
+```{r, echo=FALSE, results='hide'}
 library(MeRIPtools)
 ```
 ```{r}
